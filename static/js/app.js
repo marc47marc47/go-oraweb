@@ -359,7 +359,7 @@ function initEditor() {
   var writeQueryTimeout = null;
   editor = ace.edit("custom_query");
 
-  editor.getSession().setMode("ace/mode/pgsql");
+  editor.getSession().setMode("ace/mode/orasql");
   editor.getSession().setTabSize(2);
   editor.getSession().setUseSoftTabs(true);
 
@@ -389,11 +389,11 @@ function initEditor() {
     }
 
     writeQueryTimeout = setTimeout(function() {
-      localStorage.setItem("pgweb_query", editor.getValue());
+      localStorage.setItem("oraweb_query", editor.getValue());
     }, 1000);
   });
 
-  var query = localStorage.getItem("pgweb_query");
+  var query = localStorage.getItem("oraweb_query");
   if (query && query.length > 0) {
     editor.setValue(query);
     editor.clearSelection();
@@ -449,17 +449,17 @@ function getConnectionString() {
   var ssl  = $("#connection_ssl").val();
 
   if (mode == "standard") {
-    var host = $("#pg_host").val();
-    var port = $("#pg_port").val();
-    var user = $("#pg_user").val();
-    var pass = encodeURIComponent($("#pg_password").val());
-    var db   = $("#pg_db").val();
+    var host = $("#ora_host").val();
+    var port = $("#ora_port").val();
+    var user = $("#ora_user").val();
+    var pass = encodeURIComponent($("#ora_password").val());
+    var db   = $("#ora_db").val();
 
     if (port.length == 0) {
-      port = "5432";
+      port = "1522";
     }
 
-    url = "postgres://" + user + ":" + pass + "@" + host + ":" + port + "/" + db + "?sslmode=" + ssl;
+    url = "oracle://" + user + ":" + pass + "@" + host + ":" + port + "/" + db + "?sslmode=" + ssl;
   }
   else {
     var local = url.indexOf("localhost") != -1 || url.indexOf("127.0.0.1") != -1;
@@ -577,7 +577,7 @@ $(document).ready(function() {
     }
   });
 
-  $("#pg_host").on("change", function() {
+  $("#ora_host").on("change", function() {
     var value = $(this).val();
 
     if (value.indexOf("localhost") != -1 || value.indexOf("127.0.0.1") != -1) {
@@ -624,11 +624,11 @@ $(document).ready(function() {
     }
 
     // Fill in bookmarked connection settings
-    $("#pg_host").val(item.host);
-    $("#pg_port").val(item.port);
-    $("#pg_user").val(item.user);
-    $("#pg_password").val(item.password);
-    $("#pg_db").val(item.database);
+    $("#ora_host").val(item.host);
+    $("#ora_port").val(item.port);
+    $("#ora_user").val(item.user);
+    $("#ora_password").val(item.password);
+    $("#ora_db").val(item.database);
     $("#connection_ssl").val(item.ssl);
   });
 

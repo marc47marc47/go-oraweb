@@ -1,7 +1,7 @@
 TARGETS = darwin/amd64 darwin/386 linux/amd64 linux/386 windows/amd64 windows/386
 GIT_COMMIT = $(shell git rev-parse HEAD)
 BUILD_TIME = $(shell date -u +"%Y-%m-%dT%H:%M:%SZ" | tr -d '\n')
-DOCKER_RELEASE_TAG = "sosedoff/pgweb:$(shell git describe --abbrev=0 --tags | sed 's/v//')"
+DOCKER_RELEASE_TAG = "oraweb:$(shell git describe --abbrev=0 --tags | sed 's/v//')"
 BINDATA_IGNORE = $(shell git ls-files -io --exclude-standard $< | sed 's/^/-ignore=/;s/[.]/[.]/g')
 
 usage:
@@ -33,18 +33,18 @@ dev-assets:
 
 dev: dev-assets
 	godep go build
-	@echo "You can now execute ./pgweb"
+	@echo "You can now execute ./oraweb"
 
 build: assets
 	godep go build
-	@echo "You can now execute ./pgweb"
+	@echo "You can now execute ./oraweb"
 
 release: assets
 	@echo "Building binaries..."
 	@gox \
 		-osarch="$(TARGETS)" \
-		-ldflags "-X github.com/sosedoff/pgweb/pkg/command.GitCommit $(GIT_COMMIT) -X github.com/sosedoff/pgweb/pkg/command.BuildTime $(BUILD_TIME)" \
-		-output="./bin/pgweb_{{.OS}}_{{.Arch}}"
+		-ldflags "-X pkg/command.GitCommit $(GIT_COMMIT) -X pkg/command.BuildTime $(BUILD_TIME)" \
+		-output="./bin/oraweb_{{.OS}}_{{.Arch}}"
 
 	@echo "\nPackaging binaries...\n"
 	@./script/package.sh
@@ -60,13 +60,13 @@ setup:
 	godep restore
 
 clean:
-	rm -f ./pgweb
+	rm -f ./oraweb
 	rm -rf ./bin/*
 	rm -f bindata.go
 	make assets
 
 docker:
-	docker build -t pgweb .
+	docker build -t go-oraweb .
 
 docker-release:
 	docker build -t $(DOCKER_RELEASE_TAG) .

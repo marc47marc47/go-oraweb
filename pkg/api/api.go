@@ -8,11 +8,11 @@ import (
 	"strings"
 	"time"
 
+	"../bookmarks"
+	"../client"
+	"../command"
+	"../connection"
 	"github.com/gin-gonic/gin"
-	"github.com/sosedoff/pgweb/pkg/bookmarks"
-	"github.com/sosedoff/pgweb/pkg/client"
-	"github.com/sosedoff/pgweb/pkg/command"
-	"github.com/sosedoff/pgweb/pkg/connection"
 )
 
 var DbClient *client.Client
@@ -189,7 +189,7 @@ func HandleQuery(query string, c *gin.Context) {
 	q := c.Request.URL.Query()
 
 	if len(q["format"]) > 0 && q["format"][0] == "csv" {
-		filename := fmt.Sprintf("pgweb-%v.csv", time.Now().Unix())
+		filename := fmt.Sprintf("oraweb-%v.csv", time.Now().Unix())
 		if len(q["filename"]) > 0 && q["filename"][0] != "" {
 			filename = q["filename"][0]
 		}

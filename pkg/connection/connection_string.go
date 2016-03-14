@@ -8,7 +8,7 @@ import (
 	"os/user"
 	"strings"
 
-	"github.com/sosedoff/pgweb/pkg/command"
+	"../command"
 )
 
 func currentUser() (string, error) {
@@ -29,8 +29,8 @@ func FormatUrl(opts command.Options) (string, error) {
 	url := opts.Url
 
 	// Make sure to only accept urls in a standard format
-	if !strings.HasPrefix(url, "postgres://") && !strings.HasPrefix(url, "postgresql://") {
-		return "", errors.New("Invalid URL. Valid format: postgres://user:password@host:port/db?sslmode=mode")
+	if !strings.HasPrefix(url, "oracle://") && !strings.HasPrefix(url, "oracle://") {
+		return "", errors.New("Invalid URL. Valid format: oracle://user/password@host:port/db")
 	}
 
 	// Special handling for local connections
@@ -77,7 +77,7 @@ func BuildString(opts command.Options) (string, error) {
 		}
 	}
 
-	url := "postgres://"
+	url := "oracle://"
 
 	if opts.User != "" {
 		url += opts.User

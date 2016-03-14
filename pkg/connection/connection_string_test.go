@@ -5,8 +5,8 @@ import (
 	"os/user"
 	"testing"
 
-	"github.com/sosedoff/pgweb/pkg/command"
 	"github.com/stretchr/testify/assert"
+	"pkg/command"
 )
 
 func Test_Invalid_Url(t *testing.T) {
@@ -22,12 +22,12 @@ func Test_Invalid_Url(t *testing.T) {
 
 		assert.Equal(t, "", str)
 		assert.Error(t, err)
-		assert.Equal(t, "Invalid URL. Valid format: postgres://user:password@host:port/db?sslmode=mode", err.Error())
+		assert.Equal(t, "Invalid URL. Valid format: oracle://user:password@host:port/db?sslmode=mode", err.Error())
 	}
 }
 
 func Test_Valid_Url(t *testing.T) {
-	url := "postgres://myhost/database"
+	url := "oracle://myhost/database"
 	str, err := BuildString(command.Options{Url: url})
 
 	assert.Equal(t, nil, err)
@@ -36,38 +36,38 @@ func Test_Valid_Url(t *testing.T) {
 
 func Test_Url_And_Ssl_Flag(t *testing.T) {
 	str, err := BuildString(command.Options{
-		Url: "postgres://myhost/database",
+		Url: "oracle://myhost/database",
 		Ssl: "disable",
 	})
 
 	assert.Equal(t, nil, err)
-	assert.Equal(t, "postgres://myhost/database?sslmode=disable", str)
+	assert.Equal(t, "oracle://myhost/database?sslmode=disable", str)
 }
 
 func Test_Localhost_Url_And_No_Ssl_Flag(t *testing.T) {
 	str, err := BuildString(command.Options{
-		Url: "postgres://localhost/database",
+		Url: "oracle://localhost/database",
 	})
 
 	assert.Equal(t, nil, err)
-	assert.Equal(t, "postgres://localhost/database?sslmode=disable", str)
+	assert.Equal(t, "oracle://localhost/database?sslmode=disable", str)
 
 	str, err = BuildString(command.Options{
-		Url: "postgres://127.0.0.1/database",
+		Url: "oracle://127.0.0.1/database",
 	})
 
 	assert.Equal(t, nil, err)
-	assert.Equal(t, "postgres://127.0.0.1/database?sslmode=disable", str)
+	assert.Equal(t, "oracle://127.0.0.1/database?sslmode=disable", str)
 }
 
 func Test_Localhost_Url_And_Ssl_Flag(t *testing.T) {
 	str, err := BuildString(command.Options{
-		Url: "postgres://localhost/database",
+		Url: "oracle://localhost/database",
 		Ssl: "require",
 	})
 
 	assert.Equal(t, nil, err)
-	assert.Equal(t, "postgres://localhost/database?sslmode=require", str)
+	assert.Equal(t, "oracle://localhost/database?sslmode=require", str)
 
 	str, err = BuildString(command.Options{
 		Url: "postgres://127.0.0.1/database",
@@ -75,29 +75,29 @@ func Test_Localhost_Url_And_Ssl_Flag(t *testing.T) {
 	})
 
 	assert.Equal(t, nil, err)
-	assert.Equal(t, "postgres://127.0.0.1/database?sslmode=require", str)
+	assert.Equal(t, "oracle://127.0.0.1/database?sslmode=require", str)
 }
 
 func Test_Localhost_Url_And_Ssl_Arg(t *testing.T) {
 	str, err := BuildString(command.Options{
-		Url: "postgres://localhost/database?sslmode=require",
+		Url: "oracle://localhost/database?sslmode=require",
 	})
 
 	assert.Equal(t, nil, err)
-	assert.Equal(t, "postgres://localhost/database?sslmode=require", str)
+	assert.Equal(t, "oracle://localhost/database?sslmode=require", str)
 
 	str, err = BuildString(command.Options{
-		Url: "postgres://127.0.0.1/database?sslmode=require",
+		Url: "oracle://127.0.0.1/database?sslmode=require",
 	})
 
 	assert.Equal(t, nil, err)
-	assert.Equal(t, "postgres://127.0.0.1/database?sslmode=require", str)
+	assert.Equal(t, "oracle://127.0.0.1/database?sslmode=require", str)
 }
 
 func Test_Flag_Args(t *testing.T) {
 	str, err := BuildString(command.Options{
 		Host:   "host",
-		Port:   5432,
+		Port:   1522,
 		User:   "user",
 		Pass:   "password",
 		DbName: "db",
@@ -110,7 +110,7 @@ func Test_Flag_Args(t *testing.T) {
 func Test_Localhost(t *testing.T) {
 	opts := command.Options{
 		Host:   "localhost",
-		Port:   5432,
+		Port:   1522,
 		User:   "user",
 		Pass:   "password",
 		DbName: "db",
@@ -118,18 +118,18 @@ func Test_Localhost(t *testing.T) {
 
 	str, err := BuildString(opts)
 	assert.Equal(t, nil, err)
-	assert.Equal(t, "postgres://user:password@localhost:5432/db?sslmode=disable", str)
+	assert.Equal(t, "oracle://user:password@localhost:5432/db?sslmode=disable", str)
 
 	opts.Host = "127.0.0.1"
 	str, err = BuildString(opts)
 	assert.Equal(t, nil, err)
-	assert.Equal(t, "postgres://user:password@127.0.0.1:5432/db?sslmode=disable", str)
+	assert.Equal(t, "oracle://user:password@127.0.0.1:5432/db?sslmode=disable", str)
 }
 
 func Test_Localhost_And_Ssl(t *testing.T) {
 	opts := command.Options{
 		Host:   "localhost",
-		Port:   5432,
+		Port:   1522,
 		User:   "user",
 		Pass:   "password",
 		DbName: "db",
@@ -138,7 +138,7 @@ func Test_Localhost_And_Ssl(t *testing.T) {
 
 	str, err := BuildString(opts)
 	assert.Equal(t, nil, err)
-	assert.Equal(t, "postgres://user:password@localhost:5432/db?sslmode=require", str)
+	assert.Equal(t, "oracle://user:password@localhost:5432/db?sslmode=require", str)
 }
 
 func Test_No_User(t *testing.T) {
@@ -147,7 +147,7 @@ func Test_No_User(t *testing.T) {
 	str, err := BuildString(opts)
 
 	assert.Equal(t, nil, err)
-	assert.Equal(t, fmt.Sprintf("postgres://%s@host:5432/db", u.Username), str)
+	assert.Equal(t, fmt.Sprintf("oracle://%s@host:5432/db", u.Username), str)
 }
 
 func Test_Port(t *testing.T) {
@@ -155,7 +155,7 @@ func Test_Port(t *testing.T) {
 	str, err := BuildString(opts)
 
 	assert.Equal(t, nil, err)
-	assert.Equal(t, "postgres://user@host:5000/db", str)
+	assert.Equal(t, "oracle://user@host:5000/db", str)
 }
 
 func Test_Blank(t *testing.T) {

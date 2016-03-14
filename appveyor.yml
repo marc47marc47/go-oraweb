@@ -1,10 +1,10 @@
-clone_folder: c:\go\src\github.com\sosedoff\pgweb
+clone_folder: c:\Temp\projects\go\go-oraweb
 
 environment:
-  GOPATH: c:\go
+  GOPATH: c:\Temp\Tools\+libraries\go
 
 services:
-  - postgresql
+  - oracle
 
 install:
   - set PATH=%GOPATH%\bin;%PATH%

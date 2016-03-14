@@ -1,47 +1,45 @@
 package statements
 
 const (
-	PG_DATABASES = `SELECT datname FROM pg_database WHERE NOT datistemplate ORDER BY datname ASC`
+	ORA_DATABASES = `SELECT ora_database_name FROM DUAL`
 
-	PG_SCHEMAS = `SELECT schema_name FROM information_schema.schemata ORDER BY schema_name ASC`
+	ORA_SCHEMAS = `SELECT DISTINCT owner FROM all_objects ORDER BY owner ASC`
 
-	PG_INFO = `SELECT
-  session_user
-, current_user
-, current_database()
-, current_schemas(false)
-, inet_client_addr()
-, inet_client_port()
-, inet_server_addr()
-, inet_server_port()
-, version()`
+	ORA_INFO = `SELECT SYS_CONTEXT ('USERENV', 'SESSION_USER'),
+       SYS_CONTEXT ('USERENV', 'CURRENT_USER'),
+       SYS_CONTEXT ('USERENV', 'DB_NAME'),
+       NULL AS current_schemas,
+       SYS_CONTEXT ('USERENV', 'IP_ADDRESS'),
+       NULL AS inet_client_port,
+       NULL AS inet_server_addr,
+       1522 AS inet_server_port,
+       NULL AS version
+  FROM DUAL`
 
-	PG_TABLE_INDEXES = `SELECT indexname, indexdef FROM pg_indexes WHERE tablename = $1`
+	ORA_TABLE_INDEXES = `SELECT index_name, status FROM all_indexes WHERE table_name = :table_name`
 
-	PG_TABLE_INFO = `SELECT
-  pg_size_pretty(pg_table_size($1)) AS data_size
-, pg_size_pretty(pg_indexes_size($1)) AS index_size
-, pg_size_pretty(pg_total_relation_size($1)) AS total_size
-, (SELECT reltuples FROM pg_class WHERE oid = $1::regclass) AS rows_count`
+	ORA_TABLE_INFO = `SELECT
+  'Unk kB' AS data_size
+, 'Unk kB' AS index_size
+, 'Unk kB' AS total_size
+, (SELECT num_rows FROM all_tables WHERE table_name = :table_name) AS rows_count`
 
-	PG_TABLE_SCHEMA = `SELECT
-column_name, data_type, is_nullable, character_maximum_length, character_set_catalog, column_default
-FROM information_schema.columns
-WHERE table_name = $1`
+	ORA_TABLE_SCHEMA = `SELECT table_name, column_name, data_type, nullable, data_length, character_set_name, 'not implemented' as data_default
+  FROM all_tab_cols
+  WHERE table_name = :table_name`
 
-	PG_TABLES = `SELECT table_name FROM information_schema.tables WHERE table_schema = 'public' ORDER BY table_schema,table_name`
+	ORA_TABLES = `SELECT table_name FROM all_tables ORDER BY owner, table_name`
 
-	PG_ACTIVITY = `SELECT
-  datname,
-  query,
-  state,
-  waiting,
-  query_start,
-  state_change,
-  pid,
-  datid,
-  application_name,
-  client_addr
-  FROM pg_stat_activity
-  WHERE state IS NOT NULL`
+	ORA_ACTIVITY = `SELECT
+  null as datname,
+  null as query,
+  null as state,
+  null as waiting,
+  null as query_start,
+  null as state_change,
+  null as pid,
+  null as datid,
+  null as application_name,
+  null as client_addr
+  FROM dual`
 )

@@ -6,13 +6,13 @@ import (
 	"fmt"
 	"reflect"
 
-	_ "github.com/lib/pq"
+	_ "github.com/mattn/go-oci8"
 
+	"../command"
+	"../connection"
+	"../history"
+	"../statements"
 	"github.com/jmoiron/sqlx"
-	"github.com/sosedoff/pgweb/pkg/command"
-	"github.com/sosedoff/pgweb/pkg/connection"
-	"github.com/sosedoff/pgweb/pkg/history"
-	"github.com/sosedoff/pgweb/pkg/statements"
 )
 
 type Client struct {
@@ -46,7 +46,7 @@ func New() (*Client, error) {
 		return nil, err
 	}
 
-	db, err := sqlx.Open("postgres", str)
+	db, err := sqlx.Open("oci8", str)
 
 	if err != nil {
 		return nil, err
@@ -66,7 +66,7 @@ func NewFromUrl(url string) (*Client, error) {
 		fmt.Println("Creating a new client for:", url)
 	}
 
-	db, err := sqlx.Open("postgres", url)
+	db, err := sqlx.Open("oci8", url)
 	if err != nil {
 		return nil, err
 	}
@@ -85,28 +85,28 @@ func (client *Client) Test() error {
 }
 
 func (client *Client) Info() (*Result, error) {
-	return client.query(statements.PG_INFO)
+	return client.query(statements.ORA_INFO)
 }
 
 func (client *Client) Databases() ([]string, error) {
-	return client.fetchRows(statements.PG_DATABASES)
+	return client.fetchRows(statements.ORA_DATABASES)
 }
 
 func (client *Client) Schemas() ([]string, error) {
-	return client.fetchRows(statements.PG_SCHEMAS)
+	return client.fetchRows(statements.ORA_SCHEMAS)
 }
 
 func (client *Client) Tables() ([]string, error) {
-	return client.fetchRows(statements.PG_TABLES)
+	return client.fetchRows(statements.ORA_TABLES)
 }
 
 func (client *Client) Table(table string) (*Result, error) {
-	return client.query(statements.PG_TABLE_SCHEMA, table)
+	return client.query(statements.ORA_TABLE_SCHEMA, table)
 }
 
 func (client *Client) TableRows(table string, opts RowsOptions) (*Result, error) {
 	sql := fmt.Sprintf(`SELECT * FROM "%s"`, table)
-
+    /*
 	if opts.SortColumn != "" {
 		if opts.SortOrder == "" {
 			opts.SortOrder = "ASC"
@@ -118,16 +118,16 @@ func (client *Client) TableRows(table string, opts RowsOptions) (*Result, error)
 	if opts.Limit > 0 {
 		sql += fmt.Sprintf(" LIMIT %d", opts.Limit)
 	}
-
+    */
 	return client.query(sql)
 }
 
 func (client *Client) TableInfo(table string) (*Result, error) {
-	return client.query(statements.PG_TABLE_INFO, table)
+	return client.query(statements.ORA_TABLE_INFO, table)
 }
 
 func (client *Client) TableIndexes(table string) (*Result, error) {
-	res, err := client.query(statements.PG_TABLE_INDEXES, table)
+	res, err := client.query(statements.ORA_TABLE_INDEXES, table)
 
 	if err != nil {
 		return nil, err
@@ -138,7 +138,7 @@ func (client *Client) TableIndexes(table string) (*Result, error) {
 
 // Returns all active queriers on the server
 func (client *Client) Activity() (*Result, error) {
-	return client.query(statements.PG_ACTIVITY)
+	return client.query(statements.ORA_ACTIVITY)
 }
 
 func (client *Client) Query(query string) (*Result, error) {

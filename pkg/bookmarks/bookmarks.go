@@ -39,7 +39,7 @@ func fileBasename(path string) string {
 
 func Path() string {
 	path, _ := homedir.Dir()
-	return fmt.Sprintf("%s/.pgweb/bookmarks", path)
+	return fmt.Sprintf("%s/.oraweb/bookmarks", path)
 }
 
 func ReadAll(path string) (map[string]Bookmark, error) {

@@ -5,8 +5,8 @@ import (
 	"mime"
 	"path/filepath"
 
+	"../data"
 	"github.com/gin-gonic/gin"
-	"github.com/sosedoff/pgweb/pkg/data"
 )
 
 var extraMimeTypes = map[string]string{

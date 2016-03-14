@@ -6,12 +6,12 @@ import (
 	"os/exec"
 	"os/signal"
 
+	"./pkg/api"
+	"./pkg/client"
+	"./pkg/command"
+	"./pkg/connection"
+	"./pkg/util"
 	"github.com/gin-gonic/gin"
-	"github.com/sosedoff/pgweb/pkg/api"
-	"github.com/sosedoff/pgweb/pkg/client"
-	"github.com/sosedoff/pgweb/pkg/command"
-	"github.com/sosedoff/pgweb/pkg/connection"
-	"github.com/sosedoff/pgweb/pkg/util"
 )
 
 var options command.Options
@@ -67,7 +67,7 @@ func initOptions() {
 }
 
 func printVersion() {
-	str := fmt.Sprintf("Pgweb v%s", command.VERSION)
+	str := fmt.Sprintf("Oraweb v%s", command.VERSION)
 	if command.GitCommit != "" {
 		str += fmt.Sprintf(" (git: %s)", command.GitCommit)
 	}
