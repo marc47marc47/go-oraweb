@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # pgweb
 
 Web-based PostgreSQL database browser written in Go.
@@ -95,3 +96,7 @@ make test
 The MIT License (MIT)
 
 Copyright (c) 2014-2015 Dan Sosedoff, <dan.sosedoff@gmail.com>
+=======
+# go-oraweb
+Web Client for Oracle DBs
+>>>>>>> fdb4f0c43a045b618db8f677e6d5bff18c20decd
