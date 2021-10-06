@@ -11,7 +11,7 @@ type Options struct {
 	Debug    bool   `short:"d" long:"debug" description:"Enable debugging mode" default:"false"`
 	Url      string `long:"url" description:"Database connection string"`
 	Host     string `long:"host" description:"Server hostname or IP"`
-	Port     int    `long:"port" description:"Server port" default:"5432"`
+	Port     int    `long:"port" description:"Server port" default:"1521"`
 	User     string `long:"user" description:"Database user"`
 	Pass     string `long:"pass" description:"Password for user"`
 	DbName   string `long:"db" description:"Database name"`

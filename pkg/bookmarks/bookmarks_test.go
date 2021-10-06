@@ -24,7 +24,7 @@ func Test_Bookmark(t *testing.T) {
 
 	assert.Equal(t, nil, err)
 	assert.Equal(t, "localhost", bookmark.Host)
-	assert.Equal(t, "5432", bookmark.Port)
+	assert.Equal(t, "1521", bookmark.Port)
 	assert.Equal(t, "postgres", bookmark.User)
 	assert.Equal(t, "mydatabase", bookmark.Database)
 	assert.Equal(t, "disable", bookmark.Ssl)

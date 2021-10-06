@@ -104,7 +104,7 @@ func Test_Flag_Args(t *testing.T) {
 	})
 
 	assert.Equal(t, nil, err)
-	assert.Equal(t, "postgres://user:password@host:5432/db", str)
+	assert.Equal(t, "postgres://user:password@host:1521/db", str)
 }
 
 func Test_Localhost(t *testing.T) {
@@ -118,12 +118,12 @@ func Test_Localhost(t *testing.T) {
 
 	str, err := BuildString(opts)
 	assert.Equal(t, nil, err)
-	assert.Equal(t, "oracle://user:password@localhost:5432/db?sslmode=disable", str)
+	assert.Equal(t, "oracle://user:password@localhost:1521/db?sslmode=disable", str)
 
 	opts.Host = "127.0.0.1"
 	str, err = BuildString(opts)
 	assert.Equal(t, nil, err)
-	assert.Equal(t, "oracle://user:password@127.0.0.1:5432/db?sslmode=disable", str)
+	assert.Equal(t, "oracle://user:password@127.0.0.1:1521/db?sslmode=disable", str)
 }
 
 func Test_Localhost_And_Ssl(t *testing.T) {
@@ -138,16 +138,16 @@ func Test_Localhost_And_Ssl(t *testing.T) {
 
 	str, err := BuildString(opts)
 	assert.Equal(t, nil, err)
-	assert.Equal(t, "oracle://user:password@localhost:5432/db?sslmode=require", str)
+	assert.Equal(t, "oracle://user:password@localhost:1521/db?sslmode=require", str)
 }
 
 func Test_No_User(t *testing.T) {
-	opts := command.Options{Host: "host", Port: 5432, DbName: "db"}
+	opts := command.Options{Host: "host", Port: 1521, DbName: "db"}
 	u, _ := user.Current()
 	str, err := BuildString(opts)
 
 	assert.Equal(t, nil, err)
-	assert.Equal(t, fmt.Sprintf("oracle://%s@host:5432/db", u.Username), str)
+	assert.Equal(t, fmt.Sprintf("oracle://%s@host:1521/db", u.Username), str)
 }
 
 func Test_Port(t *testing.T) {

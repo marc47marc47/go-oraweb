@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # go-oraweb
 
 Web-based Oracle database browser written in Go.
