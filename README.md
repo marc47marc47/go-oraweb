@@ -85,12 +85,5 @@ make test
 - Use [issues](https://github.com/marc47marc47/go-oraweb/issues) for any questions
 - Check [wiki](https://github.com/marc47marc47/go-oraweb/wiki) for extra documentation
 
-## License
-
-The MIT License (MIT)
-
-Copyright (c) 2014-2015 Dan marc47marc47, <dan.marc47marc47@gmail.com>
-=======
 # go-oraweb
 Web Client for Oracle DBs
->>>>>>> fdb4f0c43a045b618db8f677e6d5bff18c20decd
