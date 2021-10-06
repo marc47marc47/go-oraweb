@@ -1,0 +1,9 @@
+prefix=/Users/marc47/oracle/instantclient_19_8
+includedir=${prefix}/sdk/include
+libdir=${prefix}
+
+Name: oci8
+Description: Oracle Instant Client
+Version: 12.2
+Cflags: -I${includedir}
+Libs: -L${libdir} -lclntsh

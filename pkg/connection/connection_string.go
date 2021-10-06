@@ -8,7 +8,7 @@ import (
 	"os/user"
 	"strings"
 
-	"../command"
+	"oraweb/pkg/command"
 )
 
 func currentUser() (string, error) {

@@ -5,7 +5,8 @@ import (
 	"mime"
 	"path/filepath"
 
-	"../data"
+	"oraweb/pkg/data"
+
 	"github.com/gin-gonic/gin"
 )
 

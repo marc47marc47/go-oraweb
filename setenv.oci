@@ -1,0 +1,8 @@
+#export LD_LIBRARY_PATH=/Users/marc47/oracle/instantclient_19_8:$LD_LIBRARY_PATH
+#export PKG_CONFIG_PATH=/Users/marc47/oracle/instantclient_19_8:$PKG_CONFIG_PATH
+export ORACLE_HOME=/Users/marc47/oracle/instantclient_19_8
+export LDFLAGS="-L/Users/marc47/oracle/instantclient_19_8 -L/Users/marc47/oracle/instantclient_19_8/sdk/include $LDFLAGS"
+export LD_LIBRARY_PATH=$ORACLE_HOME/sdk/include:$ORACLE_HOME
+export PKG_CONFIG_PATH=$ORACLE_HOME
+export DYLD_LIBRARY_PATH=$ORACLE_HOME:$ORACLE_HOME/sdk/include
+export PATH=$ORACLE_HOME:$PATH

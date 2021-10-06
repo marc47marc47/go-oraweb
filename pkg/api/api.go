@@ -8,10 +8,11 @@ import (
 	"strings"
 	"time"
 
-	"../bookmarks"
-	"../client"
-	"../command"
-	"../connection"
+	"oraweb/pkg/bookmarks"
+	"oraweb/pkg/client"
+	"oraweb/pkg/command"
+	"oraweb/pkg/connection"
+
 	"github.com/gin-gonic/gin"
 )
 

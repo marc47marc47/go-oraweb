@@ -8,10 +8,11 @@ import (
 
 	_ "github.com/mattn/go-oci8"
 
-	"../command"
-	"../connection"
-	"../history"
-	"../statements"
+	"oraweb/pkg/command"
+	"oraweb/pkg/connection"
+	"oraweb/pkg/history"
+	"oraweb/pkg/statements"
+
 	"github.com/jmoiron/sqlx"
 )
 
@@ -106,19 +107,19 @@ func (client *Client) Table(table string) (*Result, error) {
 
 func (client *Client) TableRows(table string, opts RowsOptions) (*Result, error) {
 	sql := fmt.Sprintf(`SELECT * FROM "%s"`, table)
-    /*
-	if opts.SortColumn != "" {
-		if opts.SortOrder == "" {
-			opts.SortOrder = "ASC"
+	/*
+		if opts.SortColumn != "" {
+			if opts.SortOrder == "" {
+				opts.SortOrder = "ASC"
+			}
+
+			sql += fmt.Sprintf(" ORDER BY %s %s", opts.SortColumn, opts.SortOrder)
 		}
 
-		sql += fmt.Sprintf(" ORDER BY %s %s", opts.SortColumn, opts.SortOrder)
-	}
-
-	if opts.Limit > 0 {
-		sql += fmt.Sprintf(" LIMIT %d", opts.Limit)
-	}
-    */
+		if opts.Limit > 0 {
+			sql += fmt.Sprintf(" LIMIT %d", opts.Limit)
+		}
+	*/
 	return client.query(sql)
 }
 

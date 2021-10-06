@@ -1,19 +1,19 @@
 <<<<<<< HEAD
-# pgweb
+# go-oraweb
 
-Web-based PostgreSQL database browser written in Go.
+Web-based Oracle database browser written in Go.
 
-[![Release](https://img.shields.io/github/release/sosedoff/pgweb.svg?label=Release)](https://github.com/sosedoff/pgweb/releases)
-[![Linux Build](https://img.shields.io/travis/sosedoff/pgweb.svg?label=Linux)](https://travis-ci.org/sosedoff/pgweb)
-[![Windows Build](https://img.shields.io/appveyor/ci/sosedoff/pgweb/master.svg?label=Windows)](https://ci.appveyor.com/project/sosedoff/pgweb)
+[![Release](https://img.shields.io/github/release/marc47marc47/go-oraweb.svg?label=Release)](https://github.com/marc47marc47/go-oraweb/releases)
+[![Linux Build](https://img.shields.io/travis/marc47marc47/go-oraweb.svg?label=Linux)](https://travis-ci.org/marc47marc47/go-oraweb)
+[![Windows Build](https://img.shields.io/appveyor/ci/marc47marc47/go-oraweb/master.svg?label=Windows)](https://ci.appveyor.com/project/marc47marc47/go-oraweb)
 
 ## Overview
 
-Pgweb is a web-based database browser for PostgreSQL, written in Go and works
+go-oraweb is a web-based database browser for Oracle, written in Go and works
 on OSX, Linux and Windows machines. Main idea behind using Go for backend development
 is to utilize ability of the compiler to produce zero-dependency binaries for 
-multiple platforms. Pgweb was created as an attempt to build very simple and portable
-application to work with local or remote PostgreSQL databases.
+multiple platforms. go-oraweb was created as an attempt to build very simple and portable
+application to work with local or remote Oracle databases.
 
 [See application screenshots](SCREENS.md)
 
@@ -30,44 +30,44 @@ application to work with local or remote PostgreSQL databases.
 - Query history
 - Server bookmarks
 
-Visit [WIKI](https://github.com/sosedoff/pgweb/wiki) for more details
+Visit [WIKI](https://github.com/marc47marc47/go-oraweb/wiki) for more details
 
 ## Installation
 
-[Precompiled binaries](https://github.com/sosedoff/pgweb/releases) for supported 
+[Precompiled binaries](https://github.com/marc47marc47/go-oraweb/releases) for supported 
 operating systems are available.
 
-[More installation options](https://github.com/sosedoff/pgweb/wiki/Installation)
+[More installation options](https://github.com/marc47marc47/go-oraweb/wiki/Installation)
 
 ## Usage
 
 Start server:
 
 ```
-pgweb
+go-oraweb
 ```
 
 You can also provide connection flags:
 
 ```
-pgweb --host localhost --user myuser --db mydb
+go-oraweb --host localhost --user myuser --db mydb
 ```
 
 Connection URL scheme is also supported:
 
 ```
-pgweb --url postgres://user:password@host:port/database?sslmode=[mode]
+go-oraweb --url oracle://user:password@host:port/database?sslmode=[mode]
 ```
 
 ## Deploy on Heroku
 
-[![Heroku Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/sosedoff/pgweb)
+[![Heroku Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/marc47marc47/go-oraweb)
 
 ## Testing
 
-Before running tests, make sure you have PostgreSQL server running on `localhost:5432`
-interface. Also, you must have `postgres` user that could create new databases
-in your local environment. Pgweb server should not be running at the same time.
+Before running tests, make sure you have Oracle server running on `localhost:1521`
+interface. Also, you must have `oracle` user that could create new databases
+in your local environment. go-oraweb server should not be running at the same time.
 
 Execute test suite:
 
@@ -82,20 +82,14 @@ make test
 - Commit your changes
 - Execute test suite
 - Push your code and open a new pull request
-- Use [issues](https://github.com/sosedoff/pgweb/issues) for any questions
-- Check [wiki](https://github.com/sosedoff/pgweb/wiki) for extra documentation
-
-## Contact
-
-- Dan Sosedoff
-- [dan.sosedoff@gmail.com](mailto:dan.sosedoff@gmail.com)
-- [http://twitter.com/sosedoff](http://twitter.com/sosedoff)
+- Use [issues](https://github.com/marc47marc47/go-oraweb/issues) for any questions
+- Check [wiki](https://github.com/marc47marc47/go-oraweb/wiki) for extra documentation
 
 ## License
 
 The MIT License (MIT)
 
-Copyright (c) 2014-2015 Dan Sosedoff, <dan.sosedoff@gmail.com>
+Copyright (c) 2014-2015 Dan marc47marc47, <dan.marc47marc47@gmail.com>
 =======
 # go-oraweb
 Web Client for Oracle DBs

@@ -1,7 +1,8 @@
 package api
 
 import (
-	"../command"
+	"oraweb/pkg/command"
+
 	"github.com/gin-gonic/gin"
 )
 

@@ -6,11 +6,12 @@ import (
 	"os/exec"
 	"os/signal"
 
-	"./pkg/api"
-	"./pkg/client"
-	"./pkg/command"
-	"./pkg/connection"
-	"./pkg/util"
+	"oraweb/pkg/api"
+	"oraweb/pkg/client"
+	"oraweb/pkg/command"
+	"oraweb/pkg/connection"
+	"oraweb/pkg/util"
+
 	"github.com/gin-gonic/gin"
 )
 
